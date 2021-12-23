@@ -7,12 +7,12 @@
 * scene
   * MainScene
 * Scripts
-  * SimpleJson               #解析json文件
+  * SimpleJson               //解析json文件
 * Resources
-  * Rank_icon				#段位图标
-  * image                       #界面ui
-* Prefabs                            #存储prefab
-* OSA                                  #osa插件目录
+  * Rank_icon				             //段位图标
+  * image                       //界面ui
+* Prefabs                            //存储prefab
+* OSA                                  //osa插件目录
 
 ## 3.代码逻辑分层
 | 文件夹     | 主要职责                 |
