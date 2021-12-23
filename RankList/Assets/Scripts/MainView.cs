@@ -59,9 +59,20 @@ public class MainView : MonoBehaviour
         }
 
         // DataManager.CreateInstance().JsonNode = newData;
-        
+        StopCoroutine("startCutDown");
+        StartCoroutine("startCutDown");
 
         rankPanel.SetActive(true);
+    }
+
+    IEnumerator startCutDown()
+    {
+        while (countDownValue > 0)
+        {
+            countDownValue--;
+            this.countDownTxt.text = "Ends in:" + countDownValue + "秒";
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     public void onHideRank()
@@ -72,12 +83,12 @@ public class MainView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        freshSpeed += Time.deltaTime;
-        if (freshSpeed >= 1.0f)
-        {
-            freshSpeed = 0;
-            countDownValue--;
-            this.countDownTxt.text = "Ends in:" + countDownValue + "秒";
-        }
+        // freshSpeed += Time.deltaTime;
+        // if (freshSpeed >= 1.0f)
+        // {
+        //     freshSpeed = 0;
+        //     countDownValue--;
+        //     this.countDownTxt.text = "Ends in:" + countDownValue + "秒";
+        // }
     }
 }
