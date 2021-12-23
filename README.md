@@ -27,17 +27,4 @@
 
 ## 4. 流程图
 
-```flow
-st=>start: 开始
-op=>operation: 加载json数据
-cond=>condition: 加载成功(是或否?)
-sub1=>subroutine: 重复加载
-io=>inputoutput: 输入输出框
-op1=>operation: 创建榜单页面
-op2=>operation: OSA解析
-op4=>operation: 展示榜单
-e=>end: 结束
-st->op->cond
-cond(yes)->op1->op2->op4->e
-cond(no)->sub1(right)->op
-```
+![](https://github.com/89trillion-wangjian/RankGame/blob/master/squence.png)
