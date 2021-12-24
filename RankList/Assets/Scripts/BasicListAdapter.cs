@@ -98,7 +98,7 @@ namespace Your.Namespace.Here.UniqueStringHereToAvoidNamespaceConflicts.Lists
 				return;
 			}
 
-			newOrRecycled.levelImg.sprite = Resources.Load("rank_icon/arenaBadge_" + (Convert.ToInt32(model.trophy) / 1000 + 1), typeof(Sprite)) as Sprite;
+			newOrRecycled.levelImg.sprite = Resources.Load(string.Concat("rank_icon/arenaBadge_", (Convert.ToInt32(model.trophy) / 1000 + 1)), typeof(Sprite)) as Sprite;
 			newOrRecycled.levelImg.rectTransform.sizeDelta = new Vector2(newOrRecycled.levelImg.sprite.rect.width,newOrRecycled.levelImg.sprite.rect.height);
 			newOrRecycled.userName.text = model.nickName;
 			newOrRecycled.cupCountTxt.text = model.trophy;
@@ -106,7 +106,7 @@ namespace Your.Namespace.Here.UniqueStringHereToAvoidNamespaceConflicts.Lists
 			{
 				newOrRecycled.rankimg.gameObject.SetActive(true);
 				newOrRecycled.rankNumTxt.gameObject.SetActive(false);
-				newOrRecycled.rankimg.sprite = Resources.Load("ranking/rank_" + model.ranking, typeof(Sprite)) as Sprite;
+				newOrRecycled.rankimg.sprite = Resources.Load(string.Concat("ranking/rank_", model.ranking), typeof(Sprite)) as Sprite;
 				newOrRecycled.rankimg.rectTransform.sizeDelta = new Vector2(newOrRecycled.rankimg.sprite.rect.width,newOrRecycled.rankimg.sprite.rect.height);
 			}
 			else

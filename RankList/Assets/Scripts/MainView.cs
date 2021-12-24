@@ -5,6 +5,7 @@ using System.IO;
 using SimpleJSON;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = System.Object;
 
 public class MainView : MonoBehaviour
 {
@@ -21,11 +22,19 @@ public class MainView : MonoBehaviour
     void Start()
     {
         rankPanel.SetActive(false);
-        StreamReader streamReader = new StreamReader(Application.dataPath + "/Data/ranklist.json");
+        StreamReader streamReader = new StreamReader(string.Concat(Application.dataPath , "/Data/ranklist.json"));
         string str = streamReader.ReadToEnd();
         var simpleJson = JSON.Parse(str);
         // Debug.Log("json数据" + simpleJson["list"][0]["uid"]);
+        
         DataManager.CreateInstance().JsonNode = simpleJson["list"];
+        // List<JsonModel> list = new List<JsonModel>();
+        // for(int i = 0; i < simpleJson["list"].Count; i++){
+        //     list.Add(simpleJson["list"][i]);
+        // }
+        // list.Sort((a, b) => { return Convert.ToInt32(a.trophy) - Convert.ToInt32(b.trophy); });
+        
+        // Debug.Log(list);
         countDownValue = simpleJson["countDown"];
 
     }
@@ -34,7 +43,6 @@ public class MainView : MonoBehaviour
     {
 
         JSONNode jsonNode = DataManager.CreateInstance().JsonNode;
-        JSONNode newData = new JSONArray();
         for (int i = 0; i < jsonNode.Count; i++)
         {   
             if (jsonNode[i]["uid"] == DataManager.CreateInstance().mySelfId)
@@ -43,7 +51,7 @@ public class MainView : MonoBehaviour
                 {
                     rankimg.gameObject.SetActive(true);
                     rankNumTxt.gameObject.SetActive(false);
-                    rankimg.sprite = Resources.Load("ranking/rank_" + (i + 1) , typeof(Sprite)) as Sprite;
+                    rankimg.sprite = Resources.Load(string.Concat("ranking/rank_", (i + 1)) , typeof(Sprite)) as Sprite;
                     rankimg.rectTransform.sizeDelta = new Vector2(rankimg.sprite.rect.width,rankimg.sprite.rect.height);
                 }
                 else
@@ -57,6 +65,8 @@ public class MainView : MonoBehaviour
             }
             
         }
+        
+        
 
         // DataManager.CreateInstance().JsonNode = newData;
         StopCoroutine("startCutDown");
@@ -70,7 +80,7 @@ public class MainView : MonoBehaviour
         while (countDownValue > 0)
         {
             countDownValue--;
-            this.countDownTxt.text = "Ends in:" + countDownValue + "秒";
+            this.countDownTxt.text = string.Concat("Ends in:" , countDownValue , "秒");
             yield return new WaitForSeconds(1.0f);
         }
     }
@@ -90,5 +100,25 @@ public class MainView : MonoBehaviour
         //     countDownValue--;
         //     this.countDownTxt.text = "Ends in:" + countDownValue + "秒";
         // }
+    }
+}
+
+
+public class JsonModel
+{
+    public string id;
+    public string nickName;
+    public string avatar;
+    public string trophy;
+    public int ranking;
+
+    public JsonModel(string id, string nickName, string avatar, string trophy, int ranking  )
+    {
+        this.id = id;
+        this.nickName = nickName;
+        this.avatar = avatar;
+        this.trophy = trophy;
+        this.ranking = ranking;
+        
     }
 }
