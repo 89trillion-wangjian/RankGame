@@ -20,6 +20,8 @@ public class DataManager
 
    private JSONNode jsonNode;
 
+   public List<JsonModel> jsonList;
+
    public JSONNode JsonNode
    {
       set

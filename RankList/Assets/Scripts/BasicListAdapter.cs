@@ -57,7 +57,7 @@ namespace Your.Namespace.Here.UniqueStringHereToAvoidNamespaceConflicts.Lists
 			base.Awake();
 
 			// Retrieve the models from your data source and set the items count
-			int count = DataManager.CreateInstance().JsonNode.Count;
+			int count = DataManager.CreateInstance().jsonList.Count;
 			RetrieveDataAndUpdate(count);
 			
 		}
@@ -200,7 +200,9 @@ namespace Your.Namespace.Here.UniqueStringHereToAvoidNamespaceConflicts.Lists
 
 			// Retrieve your data here
 
-			JSONNode jsonNode = DataManager.CreateInstance().JsonNode;
+			// JSONNode jsonNode = DataManager.CreateInstance().JsonNode;
+			
+			List<JsonModel> json = DataManager.CreateInstance().jsonList;
 			
 			for (int i = 0; i < count; ++i)
 			{
@@ -211,10 +213,10 @@ namespace Your.Namespace.Here.UniqueStringHereToAvoidNamespaceConflicts.Lists
 
 				var model = new MyListItemModel()
 				{
-					id = jsonNode[i]["uid"],
-					nickName = jsonNode[i]["nickName"],
-					avatar = jsonNode[i]["avatar"],
-					trophy = jsonNode[i]["trophy"],
+					id = json[i].id,
+					nickName = json[i].nickName,
+					avatar = json[i].avatar,
+					trophy = json[i].trophy,
 					ranking = i + 1
 				};
 				newItems[i] = model;

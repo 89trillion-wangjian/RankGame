@@ -27,13 +27,26 @@ public class MainView : MonoBehaviour
         var simpleJson = JSON.Parse(str);
         // Debug.Log("json数据" + simpleJson["list"][0]["uid"]);
         
-        DataManager.CreateInstance().JsonNode = simpleJson["list"];
+        // DataManager.CreateInstance().JsonNode = simpleJson["list"];
+        
         // List<JsonModel> list = new List<JsonModel>();
-        // for(int i = 0; i < simpleJson["list"].Count; i++){
-        //     list.Add(simpleJson["list"][i]);
-        // }
+        for(int i = 0; i < simpleJson["list"].Count; i++){
+            // list.Add(simpleJson["list"][i]);
+        }
         // list.Sort((a, b) => { return Convert.ToInt32(a.trophy) - Convert.ToInt32(b.trophy); });
         
+        List<JsonModel> list = new List<JsonModel>();
+        for (int i = 0; i < simpleJson["list"].Count; i++)
+        {
+            // TestJsonField fieldRead = new TestJsonField();
+            JsonModel jsonModel = new JsonModel(simpleJson["list"][i]["uid"], simpleJson["list"][i]["nickName"], simpleJson["list"][i]["avatar"],
+                simpleJson["list"][i]["trophy"]
+                );
+            list.Add(jsonModel);
+        }
+        list.Sort((a, b) => { return Convert.ToInt32(b.trophy) - Convert.ToInt32(a.trophy); } );
+
+        DataManager.CreateInstance().jsonList = list;
         // Debug.Log(list);
         countDownValue = simpleJson["countDown"];
 
@@ -42,10 +55,11 @@ public class MainView : MonoBehaviour
     public void OnOpenRank()
     {
 
-        JSONNode jsonNode = DataManager.CreateInstance().JsonNode;
-        for (int i = 0; i < jsonNode.Count; i++)
+        // JSONNode jsonNode = DataManager.CreateInstance().JsonNode;
+        List<JsonModel> json = DataManager.CreateInstance().jsonList;
+        for (int i = 0; i < json.Count; i++)
         {   
-            if (jsonNode[i]["uid"] == DataManager.CreateInstance().mySelfId)
+            if (json[i].id == DataManager.CreateInstance().mySelfId)
             {
                 if (i < 3)
                 {
@@ -60,8 +74,9 @@ public class MainView : MonoBehaviour
                     rankNumTxt.gameObject.SetActive(true);
                     rankNumTxt.text = i + 1 + "";
                 }
-                userName.text = jsonNode[i]["nickName"];
-                cupCountTxt.text = jsonNode[i]["trophy"];
+
+                userName.text = json[i].nickName;
+                cupCountTxt.text = json[i].trophy;
             }
             
         }
@@ -110,15 +125,13 @@ public class JsonModel
     public string nickName;
     public string avatar;
     public string trophy;
-    public int ranking;
 
-    public JsonModel(string id, string nickName, string avatar, string trophy, int ranking  )
+    public JsonModel(string id, string nickName, string avatar, string trophy  )
     {
         this.id = id;
         this.nickName = nickName;
         this.avatar = avatar;
         this.trophy = trophy;
-        this.ranking = ranking;
         
     }
 }
