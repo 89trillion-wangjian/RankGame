@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ToastCtrl : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text text;
+    [SerializeField]public Text text;
     void Start()
     {
         
@@ -16,6 +16,7 @@ public class ToastCtrl : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         this.text.text = txt;
+        CancelInvoke("HideText");
         Invoke("HideText", 2);
     }
 
