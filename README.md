@@ -27,4 +27,4 @@
 
 ## 4. 流程图
 
-![](https://github.com/89trillion-wangjian/RankGame/blob/master/squence.png)
+![](https://github.com/89trillion-wangjian/RankGame/blob/master/seq.png)
