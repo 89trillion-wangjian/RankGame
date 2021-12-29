@@ -8,7 +8,6 @@ namespace View
 {
     public class MainView : MonoBehaviour
     {
-        // Start is called before the first frame update
         [SerializeField] private GameObject rankPanel;
         
         [SerializeField] private Image rankimg;

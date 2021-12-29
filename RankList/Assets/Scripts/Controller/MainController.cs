@@ -14,16 +14,16 @@ namespace Controller
     {
         public MainView mainView;
 
-        private int _countDownValue;
+        private int countDownValue = 0;
         
         void Awake()
         {
             ReadJson();
         }
         
-        /**
-         * 读取json
-         */
+        /// <summary>
+        /// 读取json
+        /// </summary>
         public void ReadJson()
         {
             string jsonPath = string.Concat(Application.dataPath, "/Data/ranklist.json");
@@ -43,6 +43,7 @@ namespace Controller
 
             MainModel.CreateInstance().JsonList = list;
             MainModel.CreateInstance().CountDownValue = simpleJson["countDown"];
+            countDownValue = simpleJson["countDown"];
         }
 
 
@@ -51,7 +52,7 @@ namespace Controller
             var json = MainModel.CreateInstance().JsonList;
             for (int i = 0; i < json.Count; i++)
             {
-                if (json[i].id == DataManager.CreateInstance().mySelfId)
+                if (json[i].id == DataManager.CreateInstance().MySelfId)
                 {
                     mainView.ChangeRankStatus(i < 3, json);
                 }
@@ -60,13 +61,13 @@ namespace Controller
             StopCoroutine(nameof(StartCutDown));
             StartCoroutine(nameof(StartCutDown));
         }
-        
-        IEnumerator StartCutDown()
+
+        private IEnumerator StartCutDown()
         {
-            while (_countDownValue > 0)
+            while (countDownValue > 0)
             {
-                _countDownValue--;
-                mainView.UpdateCountDownTxt(_countDownValue);
+                countDownValue--;
+                mainView.UpdateCountDownTxt(countDownValue);
                 yield return new WaitForSeconds(1.0f);
             }
         }

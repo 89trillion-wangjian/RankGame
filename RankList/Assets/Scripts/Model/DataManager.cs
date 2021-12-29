@@ -5,21 +5,21 @@ namespace Model
 {
     public class DataManager
     {
-        private DataManager()
-        {
-        }
 
-        private static DataManager _singleton;
+        private static DataManager singleton;
 
-        public string mySelfId = "3716954261";
+        public string MySelfId = "3716954261";
 
         public List<JsonModel> JsonList;
 
         public JSONNode JsonNode { set; get; }
+        private DataManager()
+        {
+        }
 
         public static DataManager CreateInstance()
         {
-            return _singleton ?? (_singleton = new DataManager());
+            return singleton ?? (singleton = new DataManager());
         }
     }
 }

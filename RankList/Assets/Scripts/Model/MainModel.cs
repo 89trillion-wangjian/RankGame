@@ -4,7 +4,7 @@ namespace Model
 {
     public class MainModel
     {
-        private static MainModel _singleton; 
+        private static MainModel singleton; 
         
         public int CountDownValue { get; set; } 
         
@@ -12,7 +12,7 @@ namespace Model
 
         public static MainModel CreateInstance()
         {
-            return _singleton ?? (_singleton = new MainModel());
+            return singleton ?? (singleton = new MainModel());
         }
 
     }
