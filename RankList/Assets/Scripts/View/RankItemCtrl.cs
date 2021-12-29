@@ -4,7 +4,6 @@ namespace View
 {
     public class RankItemCtrl : MonoBehaviour
     {
-        public RankItemCtrl rankItemCtrl;
 
         public static RankItemCtrl Singleton;
 
@@ -14,7 +13,7 @@ namespace View
 
         public void Awake()
         {
-            Singleton = rankItemCtrl;
+            Singleton = this;
         }
 
 
