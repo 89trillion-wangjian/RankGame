@@ -13,8 +13,6 @@ namespace Controller
     {
         public MainView view;
 
-        private MainModel _mainModel = MainModel.CreateInstance();
-        
         private int _countDownValue;
         void Awake()
         {

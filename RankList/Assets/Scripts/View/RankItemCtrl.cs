@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace View
 {
     public class RankItemCtrl : MonoBehaviour
     {
+        public RankItemCtrl rankItemCtrl;
         // Start is called before the first frame update
+        public static RankItemCtrl Singleton;
+
+        public void Awake()
+        {
+            Singleton = rankItemCtrl;
+        }
+
         private MyListItemModel _itemData;
         [FormerlySerializedAs("toastCtrl")] public ToastView toastView;
 
