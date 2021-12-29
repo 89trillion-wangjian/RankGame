@@ -5,36 +5,41 @@ using System.IO;
 using Model;
 using SimpleJSON;
 using UnityEngine;
+using UnityEngine.Serialization;
 using View;
 
 namespace Controller
 {
     public class MainController : MonoBehaviour
     {
-        public MainView view;
+        public MainView mainView;
 
         private int _countDownValue;
+        
         void Awake()
         {
             ReadJson();
         }
         
+        /**
+         * 读取json
+         */
         public void ReadJson()
         {
-            StreamReader streamReader = new StreamReader(string.Concat(Application.dataPath, "/Data/ranklist.json"));
-            string str = streamReader.ReadToEnd();
+            string jsonPath = string.Concat(Application.dataPath, "/Data/ranklist.json");
+            string str = new StreamReader(jsonPath).ReadToEnd();
             var simpleJson = JSON.Parse(str);
-            List<JsonModel> list = new List<JsonModel>();
+            var list = new List<JsonModel>();
             for (int i = 0; i < simpleJson["list"].Count; i++)
             {
-                JsonModel jsonModel = new JsonModel(simpleJson["list"][i]["uid"], simpleJson["list"][i]["nickName"],
+                var jsonModel = new JsonModel(simpleJson["list"][i]["uid"], simpleJson["list"][i]["nickName"],
                     simpleJson["list"][i]["avatar"],
                     simpleJson["list"][i]["trophy"]
                 );
                 list.Add(jsonModel);
             }
 
-            list.Sort((a, b) => { return Convert.ToInt32(b.trophy) - Convert.ToInt32(a.trophy); });
+            list.Sort((a, b) => Convert.ToInt32(b.trophy) - Convert.ToInt32(a.trophy));
 
             MainModel.CreateInstance().JsonList = list;
             MainModel.CreateInstance().CountDownValue = simpleJson["countDown"];
@@ -43,25 +48,17 @@ namespace Controller
 
         public void RenderRankInfo()
         {
-            List<JsonModel> json = MainModel.CreateInstance().JsonList;
+            var json = MainModel.CreateInstance().JsonList;
             for (int i = 0; i < json.Count; i++)
             {
                 if (json[i].id == DataManager.CreateInstance().mySelfId)
                 {
-                    if (i < 3)
-                    {
-                        view.OnChangeRankStatus(true, json);
-                    }
-                    else
-                    {
-                        view.OnChangeRankStatus(false, json);
-                    }
-
+                    mainView.ChangeRankStatus(i < 3, json);
                 }
             }
             
-            StopCoroutine("StartCutDown");
-            StartCoroutine("StartCutDown");
+            StopCoroutine(nameof(StartCutDown));
+            StartCoroutine(nameof(StartCutDown));
         }
         
         IEnumerator StartCutDown()
@@ -69,7 +66,7 @@ namespace Controller
             while (_countDownValue > 0)
             {
                 _countDownValue--;
-                view.UpdateCountDownTxt(_countDownValue);
+                mainView.UpdateCountDownTxt(_countDownValue);
                 yield return new WaitForSeconds(1.0f);
             }
         }

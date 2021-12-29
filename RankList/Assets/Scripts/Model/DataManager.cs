@@ -13,18 +13,13 @@ namespace Model
 
         public string mySelfId = "3716954261";
 
-        public static DataManager CreateInstance()
-        {
-            if (_singleton == null)
-            {
-                _singleton = new DataManager();
-            }
-
-            return _singleton;
-        }
-
         public List<JsonModel> JsonList;
 
         public JSONNode JsonNode { set; get; }
+
+        public static DataManager CreateInstance()
+        {
+            return _singleton ?? (_singleton = new DataManager());
+        }
     }
 }
