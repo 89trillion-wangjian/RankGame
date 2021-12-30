@@ -76,26 +76,24 @@ namespace View
         /// </summary>
         /// <param name="seconds">秒</param>
         /// <returns></returns>
-        public static string FormatTime(float seconds)
+        private static string FormatTime(float seconds)
         {
             TimeSpan ts = new TimeSpan(0, 0, Convert.ToInt32(seconds));
             string str = "";
 
             if (ts.Hours > 0)
             {
-                str = string.Format("{0}时{1}分{2}秒", ts.Hours.ToString("00"), ts.Minutes.ToString("00")
-                    , ts.Seconds.ToString("00"));
+                str = $"{ts.Hours:00}时{ts.Minutes:00}分{ts.Seconds:00}秒";
             }
 
             if (ts.Hours == 0 && ts.Minutes > 0)
             {
-                str = string.Format("{0}分{1}秒", ts.Minutes.ToString("00")
-                    , ts.Seconds.ToString("00"));
+                str = $"{ts.Minutes:00}分{ts.Seconds:00}秒";
             }
 
             if (ts.Hours == 0 && ts.Minutes == 0)
             {
-                str = string.Format("00:00:{0}秒", ts.Seconds.ToString("00"));
+                str = $"00:00:{ts.Seconds:00}秒";
             }
 
             return str;

@@ -5,7 +5,6 @@ using System.IO;
 using Model;
 using SimpleJSON;
 using UnityEngine;
-using UnityEngine.Serialization;
 using View;
 
 namespace Controller
