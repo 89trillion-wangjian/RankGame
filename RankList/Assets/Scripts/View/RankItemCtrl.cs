@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using Utils;
+using EventType = Model.EventType;
 
 namespace View
 {
@@ -19,7 +21,7 @@ namespace View
 
         public void ShowText()
         {
-            toastView.ShowText("User: " + itemData.NickName + "    Rank: " + itemData.Ranking);
+            EventCenter.PostEvent(EventType.ShowToast, $"user: {itemData.NickName}   Rank: {itemData.Ranking}");
         }
 
         public void SetData(MyListItemModel model)

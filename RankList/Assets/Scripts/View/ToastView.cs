@@ -9,8 +9,9 @@ namespace View
 
         public void ShowText(string txt)
         {
-            this.gameObject.SetActive(true);
-            this.toastTxt.text = txt;
+            transform.SetAsLastSibling();
+            gameObject.SetActive(true);
+            toastTxt.text = txt;
             CancelInvoke(nameof(HideText));
             Invoke(nameof(HideText), 2);
         }

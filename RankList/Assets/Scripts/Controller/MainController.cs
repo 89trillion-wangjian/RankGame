@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Model;
@@ -14,12 +13,15 @@ namespace Controller
         public MainView mainView;
 
         private int countDownValue = 0;
-        
+
+        public static MainController Singleton;
+
         void Awake()
         {
             ReadJson();
+            Singleton = this;
         }
-        
+
         /// <summary>
         /// 读取json
         /// </summary>
@@ -45,35 +47,9 @@ namespace Controller
             countDownValue = simpleJson["countDown"];
         }
 
-
-        public void RenderRankInfo()
+        public int GetCountDown()
         {
-            var json = MainModel.CreateInstance().JsonList;
-            for (int i = 0; i < json.Count; i++)
-            {
-                if (json[i].id == DataManager.CreateInstance().MySelfId)
-                {
-                    mainView.ChangeRankStatus(i < 3, json);
-                }
-            }
-            
-            StopCoroutine(nameof(StartCutDown));
-            StartCoroutine(nameof(StartCutDown));
-        }
-
-        private IEnumerator StartCutDown()
-        {
-            while (countDownValue > 0)
-            {
-                countDownValue--;
-                mainView.UpdateCountDownTxt(countDownValue);
-                yield return new WaitForSeconds(1.0f);
-            }
-        }
-
-        public int GetCountDownValue()
-        {
-            return MainModel.CreateInstance().CountDownValue;
+            return countDownValue;
         }
     }
 }
