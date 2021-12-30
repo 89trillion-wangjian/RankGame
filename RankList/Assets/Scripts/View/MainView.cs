@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Controller;
 using Model;
 using UnityEngine;
@@ -9,17 +10,17 @@ namespace View
     public class MainView : MonoBehaviour
     {
         [SerializeField] private GameObject rankPanel;
-        
+
         [SerializeField] private Image rankimg;
-        
+
         [SerializeField] private Text rankNumTxt;
-        
+
         [SerializeField] private Text userName;
-        
+
         [SerializeField] private Text cupCountTxt;
-        
+
         [SerializeField] private Text countDownTxt;
-        
+
         [SerializeField] private MainController mainCtrl;
 
         public void OpenRank()
@@ -55,19 +56,49 @@ namespace View
             userName.text = json[ranking].nickName;
             cupCountTxt.text = json[ranking].trophy;
         }
-        
+
         /// <summary>
         /// 更新倒计时
         /// </summary>
         /// <param name="value"></param>
         public void UpdateCountDownTxt(int value)
         {
-            this.countDownTxt.text = string.Concat("Ends in:", value, "秒");
+            this.countDownTxt.text = string.Concat("Ends in:", FormatTime(value));
         }
 
         public void HideRank()
         {
             rankPanel.SetActive(false);
+        }
+
+        /// <summary>
+        /// 格式化时间
+        /// </summary>
+        /// <param name="seconds">秒</param>
+        /// <returns></returns>
+        public static string FormatTime(float seconds)
+        {
+            TimeSpan ts = new TimeSpan(0, 0, Convert.ToInt32(seconds));
+            string str = "";
+
+            if (ts.Hours > 0)
+            {
+                str = string.Format("{0}时{1}分{2}秒", ts.Hours.ToString("00"), ts.Minutes.ToString("00")
+                    , ts.Seconds.ToString("00"));
+            }
+
+            if (ts.Hours == 0 && ts.Minutes > 0)
+            {
+                str = string.Format("{0}分{1}秒", ts.Minutes.ToString("00")
+                    , ts.Seconds.ToString("00"));
+            }
+
+            if (ts.Hours == 0 && ts.Minutes == 0)
+            {
+                str = string.Format("00:00:{0}秒", ts.Seconds.ToString("00"));
+            }
+
+            return str;
         }
     }
 }
