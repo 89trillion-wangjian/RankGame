@@ -791,6 +791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8971805750769583101}
+  - component: {fileID: 5144193330372617144}
   - component: {fileID: 4004771852271545122}
   m_Layer: 5
   m_Name: BasicListAdapterItem
@@ -829,6 +830,19 @@ RectTransform:
   m_AnchoredPosition: {x: 76.56592, y: -293}
   m_SizeDelta: {x: 59.444214, y: 65.79993}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5144193330372617144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253996637467720370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4778a3910d71c4723a5b4333da42a0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: {fileID: 4004771852271545122}
 --- !u!114 &4004771852271545122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,7 +855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5901d4aff71e4a62b5e5d6dd8346019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toastView: {fileID: 0}
 --- !u!1 &5842513052200821180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,8 +2491,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4004771852271545122}
-        m_MethodName: ShowText
+      - m_Target: {fileID: 5144193330372617144}
+        m_MethodName: ShowToast
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

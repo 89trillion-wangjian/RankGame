@@ -6,26 +6,4 @@ W
 \
 ,Assets/Scripts/SimpleJson/SimpleJSONUnity.cs,3/6/360bbb491c99b1b6c8b558e779232bd00fc8353f
 S
-#Assets/Scripts/Model/DataManager.cs,9/2/92513873d7bb53e0b46906925db144f788ebe27b
-Q
-!Assets/Scripts/Model/EventType.cs,a/d/adbabdf8e16fe026f04cf552bbd0757248f9e525
-Q
-!Assets/Scripts/Model/JsonModel.cs,4/c/4c81d0cad446c5518f1d2633ca3436cbb4e72f8a
-Q
-!Assets/Scripts/Model/MainModel.cs,d/4/d467a2d1ea9626934f83e61ea36c5085e41dc8a6
-S
 #Assets/Scripts/Utils/EventCenter.cs,6/1/615a75927c88e374274f674ce7533a398124d163
-W
-'Assets/Scripts/View/BasicListAdapter.cs,7/c/7c35a5a06efc878037b5ffea3919203e21c7e0be
-S
-#Assets/Scripts/View/RankItemCtrl.cs,1/1/11fc66ce6943a3d3cd480b8fe57f052a2826e2f1
-T
-$Assets/Scripts/View/RankPanelView.cs,c/2/c214307378d24abee188ab12a51f61c6c23b4ad9
-P
- Assets/Scripts/View/ToastView.cs,9/2/92bed899c92fef86866a2cc9e94cbdbeda5757a9
-[
-+Assets/Scripts/Controller/MainController.cs,b/1/b13dbabd4050e4f1e437514953d0eaa00dc5d425
-O
-Assets/Scripts/View/MainView.cs,7/d/7d7025cb665f2db62db5352c24b9d71085b9a3f8
-`
-0Assets/Scripts/Controller/RankPanelController.cs,7/a/7a911d11b66910665fd2667cfc13e4a33ba2cbbf

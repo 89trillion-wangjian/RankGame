@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entity;
 using Model;
 using UnityEngine;
 using View;
@@ -15,7 +16,7 @@ namespace Controller
 
         public void Start()
         {
-            countDownValue = MainController.Singleton.GetCountDown();
+            countDownValue = RankModel.CreateInstance().CountDownValue;
             RenderRankInfo();
         }
 
@@ -26,10 +27,10 @@ namespace Controller
 
         private void RenderRankInfo()
         {
-            var json = MainModel.CreateInstance().JsonList;
+            var json = RankModel.CreateInstance().JsonList;
             for (int i = 0; i < json.Count; i++)
             {
-                if (json[i].id == DataManager.CreateInstance().MySelfId)
+                if (json[i].id == RankModel.CreateInstance().MySelfId)
                 {
                     FreshMyRankInfo(i < 3, json);
                     break;

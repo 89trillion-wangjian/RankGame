@@ -7,18 +7,15 @@ namespace View
     {
         [SerializeField] private Text toastTxt;
 
-        public void ShowText(string txt)
+        public void ShowToast(string txt)
         {
             transform.SetAsLastSibling();
-            gameObject.SetActive(true);
             toastTxt.text = txt;
-            CancelInvoke(nameof(HideText));
-            Invoke(nameof(HideText), 2);
         }
 
-        public void HideText()
+        public void HideToast()
         {
-            this.gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

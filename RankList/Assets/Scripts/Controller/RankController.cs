@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Entity;
 using Model;
 using SimpleJSON;
 using UnityEngine;
+using Utils;
 using View;
+using EventType = Entity.EventType;
 
 namespace Controller
 {
-    public class MainController : MonoBehaviour
+    public class RankController : MonoBehaviour
     {
-        public MainView mainView;
+        [SerializeField] private RankView view;
 
-        private int countDownValue = 0;
+        public static RankController Singleton;
 
-        public static MainController Singleton;
-
-        void Awake()
+        public void Awake()
         {
-            ReadJson();
             Singleton = this;
+            EventCenter.AddListener<string>(EventType.ShowToast, ShowToast);
+            ReadJsonData();
         }
 
-        /// <summary>
-        /// 读取json
-        /// </summary>
-        public void ReadJson()
+        private void ReadJsonData()
         {
-            string jsonPath = string.Concat(Application.dataPath, "/Data/ranklist.json");
+            string jsonPath = $"{Application.dataPath}/Data/ranklist.json";
             string str = new StreamReader(jsonPath).ReadToEnd();
             var simpleJson = JSON.Parse(str);
             var list = new List<JsonModel>();
@@ -42,14 +41,21 @@ namespace Controller
 
             list.Sort((a, b) => Convert.ToInt32(b.trophy) - Convert.ToInt32(a.trophy));
 
-            MainModel.CreateInstance().JsonList = list;
-            MainModel.CreateInstance().CountDownValue = simpleJson["countDown"];
-            countDownValue = simpleJson["countDown"];
+            RankModel.CreateInstance().JsonList = list;
+            RankModel.CreateInstance().CountDownValue = simpleJson["countDown"];
         }
 
-        public int GetCountDown()
+        public void OpenRank()
         {
-            return countDownValue;
+            view.OpenRankPanel();
+        }
+
+        /**
+         * 提示框
+         */
+        private void ShowToast(string toastTxt)
+        {
+            view.ShowToast(toastTxt);
         }
     }
 }

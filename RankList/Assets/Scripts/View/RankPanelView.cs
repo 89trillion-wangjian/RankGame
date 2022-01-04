@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Entity;
 using Model;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +36,7 @@ namespace View
             if (isTopThree)
             {
                 rankimg.sprite =
-                    Resources.Load<Sprite>(string.Concat("ranking/rank_", (ranking + 1)));
+                    Resources.Load<Sprite>($"ranking/rank_{ranking + 1}");
                 if (rankimg.sprite != null)
                 {
                     rankimg.rectTransform.sizeDelta =
@@ -45,7 +46,7 @@ namespace View
 
             if (!isTopThree)
             {
-                rankNumTxt.text = ranking + 1 + "";
+                rankNumTxt.text = $"{ranking + 1}";
             }
 
             userName.text = json[ranking].nickName;
