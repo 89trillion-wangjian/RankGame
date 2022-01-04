@@ -1,6 +1,7 @@
 ## 1. 整体框架
 
-​		创建panel，使用osa插件来实现多排行榜节点的优化问题
+controller中解析数据，成功后打开panel，通过OSA创建scroll view，优化列表节点问题，每个item有单独的控制脚本，点击弹出全局toast提示。
+
 
 ## 2. 项目结构
 
