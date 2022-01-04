@@ -1,6 +1,6 @@
 ## 1. 整体框架
 
-controller中解析数据，成功后打开panel，通过OSA创建scroll view，优化列表节点问题，每个item有单独的控制脚本，点击弹出全局toast提示。
+通过StreamReader读取json数据，controller中用simpleJson解析，通过OSA创建scroll view，优化滑动列表节点问题，view中控制item的显示，点击item弹出全局toast提示
 
 
 ## 2. 项目结构
