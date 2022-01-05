@@ -21,12 +21,12 @@ namespace View
         {
             if (ToastController.Singleton)
             {
-                ToastController.Singleton.ShowText(toastTxt);
+                ToastController.Singleton.ShowToast(toastTxt);
                 return;
             }
 
             Instantiate(toast, transform, false);
-            ToastController.Singleton.ShowText(toastTxt);
+            ToastController.Singleton.ShowToast(toastTxt);
         }
     }
 }

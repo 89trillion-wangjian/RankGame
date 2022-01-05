@@ -13,7 +13,7 @@ namespace Utils
 
         public delegate void EventHandle<T1, T2, T3>(T1 value1, T2 value2, T3 value3);
 
-        private static Dictionary<string, Delegate> _eventHandles;
+        private static Dictionary<string, Delegate> eventHandles;
 
         /// <summary>
         /// 发送事件
@@ -21,11 +21,19 @@ namespace Utils
         /// <param name="eventName">事件名</param>
         public static void PostEvent(string eventName)
         {
-            if (_eventHandles == null) return;
-            Delegate d;
-            if (_eventHandles.TryGetValue(eventName, out d))
+            if (eventHandles == null)
             {
-                if (d == null) return;
+                return;
+            }
+
+            Delegate d;
+            if (eventHandles.TryGetValue(eventName, out d))
+            {
+                if (d == null)
+                {
+                    return;
+                }
+
                 EventHandle call = d as EventHandle;
                 if (call != null)
                 {
@@ -52,11 +60,19 @@ namespace Utils
         /// <typeparam name="T"></typeparam>
         public static void PostEvent<T>(string eventName, T value)
         {
-            if (_eventHandles == null) return;
-            Delegate d;
-            if (_eventHandles.TryGetValue(eventName, out d))
+            if (eventHandles == null)
             {
-                if (d == null) return;
+                return;
+            }
+
+            Delegate d;
+            if (eventHandles.TryGetValue(eventName, out d))
+            {
+                if (d == null)
+                {
+                    return;
+                }
+
                 EventHandle<T> call = d as EventHandle<T>;
                 if (call != null)
                 {
@@ -79,11 +95,19 @@ namespace Utils
         /// <typeparam name="T2"></typeparam>
         public static void PostEvent<T1, T2>(string eventName, T1 value1, T2 value2)
         {
-            if (_eventHandles == null) return;
-            Delegate d;
-            if (_eventHandles.TryGetValue(eventName, out d))
+            if (eventHandles == null)
             {
-                if (d == null) return;
+                return;
+            }
+
+            Delegate d;
+            if (eventHandles.TryGetValue(eventName, out d))
+            {
+                if (d == null)
+                {
+                    return;
+                }
+
                 EventHandle<T1, T2> call = d as EventHandle<T1, T2>;
                 if (call != null)
                 {
@@ -108,11 +132,19 @@ namespace Utils
         /// <typeparam name="T3"></typeparam>
         public static void PostEvent<T1, T2, T3>(string eventName, T1 value1, T2 value2, T3 value3)
         {
-            if (_eventHandles == null) return;
-            Delegate d;
-            if (_eventHandles.TryGetValue(eventName, out d))
+            if (eventHandles == null)
             {
-                if (d == null) return;
+                return;
+            }
+
+            Delegate d;
+            if (eventHandles.TryGetValue(eventName, out d))
+            {
+                if (d == null)
+                {
+                    return;
+                }
+
                 EventHandle<T1, T2, T3> call = d as EventHandle<T1, T2, T3>;
                 if (call != null)
                 {
@@ -133,7 +165,7 @@ namespace Utils
         public static void AddListener(string eventName, EventHandle handle)
         {
             OnListeningAdd(eventName, handle);
-            _eventHandles[eventName] = (EventHandle) _eventHandles[eventName] + handle;
+            eventHandles[eventName] = (EventHandle) eventHandles[eventName] + handle;
         }
 
         /// <summary>
@@ -144,7 +176,7 @@ namespace Utils
         public static void AddListener(string eventName, EventHandle<object> handle)
         {
             OnListeningAdd(eventName, handle);
-            _eventHandles[eventName] = (EventHandle<object>) _eventHandles[eventName] + handle;
+            eventHandles[eventName] = (EventHandle<object>) eventHandles[eventName] + handle;
         }
 
         /// <summary>
@@ -156,7 +188,7 @@ namespace Utils
         public static void AddListener<T>(string eventName, EventHandle<T> handle)
         {
             OnListeningAdd(eventName, handle);
-            _eventHandles[eventName] = (EventHandle<T>) _eventHandles[eventName] + handle;
+            eventHandles[eventName] = (EventHandle<T>) eventHandles[eventName] + handle;
         }
 
         /// <summary>
@@ -169,7 +201,7 @@ namespace Utils
         public static void AddListener<T1, T2>(string eventName, EventHandle<T1, T2> handle)
         {
             OnListeningAdd(eventName, handle);
-            _eventHandles[eventName] = (EventHandle<T1, T2>) _eventHandles[eventName] + handle;
+            eventHandles[eventName] = (EventHandle<T1, T2>) eventHandles[eventName] + handle;
         }
 
         /// <summary>
@@ -183,7 +215,7 @@ namespace Utils
         public static void AddListener<T1, T2, T3>(string eventName, EventHandle<T1, T2, T3> handle)
         {
             OnListeningAdd(eventName, handle);
-            _eventHandles[eventName] = (EventHandle<T1, T2, T3>) _eventHandles[eventName] + handle;
+            eventHandles[eventName] = (EventHandle<T1, T2, T3>) eventHandles[eventName] + handle;
         }
 
         /// <summary>
@@ -215,14 +247,18 @@ namespace Utils
         /// <param name="handle">回调</param>
         public static void RemoveListener(string eventName, EventHandle handle)
         {
-            if (_eventHandles == null)
+            if (eventHandles == null)
             {
                 return;
             }
 
-            if (!_eventHandles.ContainsKey(eventName)) return;
+            if (!eventHandles.ContainsKey(eventName))
+            {
+                return;
+            }
+
             OnListeningRemove(eventName, handle);
-            _eventHandles[eventName] = (EventHandle) _eventHandles[eventName] - handle;
+            eventHandles[eventName] = (EventHandle) eventHandles[eventName] - handle;
         }
 
         /// <summary>
@@ -242,14 +278,18 @@ namespace Utils
         /// <param name="handle"></param>
         public static void RemoveListener<T>(string eventName, EventHandle<T> handle)
         {
-            if (_eventHandles == null)
+            if (eventHandles == null)
             {
                 return;
             }
 
-            if (!_eventHandles.ContainsKey(eventName)) return;
+            if (!eventHandles.ContainsKey(eventName))
+            {
+                return;
+            }
+
             OnListeningRemove(eventName, handle);
-            _eventHandles[eventName] = (EventHandle<T>) _eventHandles[eventName] - handle;
+            eventHandles[eventName] = (EventHandle<T>) eventHandles[eventName] - handle;
         }
 
         /// <summary>
@@ -259,14 +299,18 @@ namespace Utils
         /// <param name="handle"></param>
         public static void RemoveListener<T1, T2>(string eventName, EventHandle<T1, T2> handle)
         {
-            if (_eventHandles == null)
+            if (eventHandles == null)
             {
                 return;
             }
 
-            if (!_eventHandles.ContainsKey(eventName)) return;
+            if (!eventHandles.ContainsKey(eventName))
+            {
+                return;
+            }
+
             OnListeningRemove(eventName, handle);
-            _eventHandles[eventName] = (EventHandle<T1, T2>) _eventHandles[eventName] - handle;
+            eventHandles[eventName] = (EventHandle<T1, T2>) eventHandles[eventName] - handle;
         }
 
         /// <summary>
@@ -276,26 +320,33 @@ namespace Utils
         /// <param name="handle"></param>
         public static void RemoveListener<T1, T2, T3>(string eventName, EventHandle<T1, T2, T3> handle)
         {
-            if (_eventHandles == null)
+            if (eventHandles == null)
             {
                 return;
             }
 
-            if (!_eventHandles.ContainsKey(eventName)) return;
+            if (!eventHandles.ContainsKey(eventName))
+            {
+                return;
+            }
+
             OnListeningRemove(eventName, handle);
-            _eventHandles[eventName] = (EventHandle<T1, T2, T3>) _eventHandles[eventName] - handle;
+            eventHandles[eventName] = (EventHandle<T1, T2, T3>) eventHandles[eventName] - handle;
         }
 
         static void OnListeningAdd(string eventName, Delegate callback)
         {
-            if (_eventHandles == null)
-                _eventHandles = new Dictionary<string, Delegate>();
-            if (!_eventHandles.ContainsKey(eventName))
+            if (eventHandles == null)
             {
-                _eventHandles.Add(eventName, null);
+                eventHandles = new Dictionary<string, Delegate>();
             }
 
-            Delegate d = _eventHandles[eventName];
+            if (!eventHandles.ContainsKey(eventName))
+            {
+                eventHandles.Add(eventName, null);
+            }
+
+            Delegate d = eventHandles[eventName];
             if (d != null && d.GetType() != callback.GetType())
             {
                 throw new Exception(string.Format("尝试添加两种不同类型的委托,委托1为{0}，委托2为{1}", d.GetType(), callback.GetType()));
@@ -304,9 +355,9 @@ namespace Utils
 
         static void OnListeningRemove(string eventName, Delegate callback)
         {
-            if (_eventHandles.ContainsKey(eventName))
+            if (eventHandles.ContainsKey(eventName))
             {
-                Delegate d = _eventHandles[eventName];
+                Delegate d = eventHandles[eventName];
                 if (d != null && d.GetType() != callback.GetType())
                 {
                     throw new Exception(string.Format("尝试移除不同类型的事件，事件名{0},已存储的委托类型{1},当前事件委托{2}", eventName,

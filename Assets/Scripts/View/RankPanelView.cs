@@ -18,11 +18,6 @@ namespace View
 
         [SerializeField] private Text countDownTxt;
 
-        public void ClosePanel()
-        {
-            Destroy(gameObject);
-        }
-
         /// <summary>
         /// 更新排名状态/图等
         /// </summary>
@@ -49,14 +44,14 @@ namespace View
                 rankNumTxt.text = $"{ranking + 1}";
             }
 
-            userName.text = json[ranking].nickName;
-            cupCountTxt.text = json[ranking].trophy;
+            userName.text = json[ranking].NickName;
+            cupCountTxt.text = json[ranking].Trophy;
         }
 
 
         public void ShowCutDown(string value)
         {
-            this.countDownTxt.text = value;
+            countDownTxt.text = value;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Controller
             Singleton = this;
         }
 
-        public void ShowText(string txt)
+        public void ShowToast(string txt)
         {
             view.ShowToast(txt);
             CancelInvoke(nameof(HideText));

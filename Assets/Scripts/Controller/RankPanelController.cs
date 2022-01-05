@@ -19,18 +19,23 @@ namespace Controller
             countDownValue = RankModel.CreateInstance().CountDownValue;
             RenderRankInfo();
         }
-
+        
+        /// <summary>
+        /// 显示我的排名
+        /// </summary>
+        /// <param name="isTopThree"></param>
+        /// <param name="json"></param>
         private void FreshMyRankInfo(bool isTopThree, List<JsonModel> json)
         {
             rankView.ChangeRankStatus(isTopThree, json);
         }
-
+        
         private void RenderRankInfo()
         {
             var json = RankModel.CreateInstance().JsonList;
             for (int i = 0; i < json.Count; i++)
             {
-                if (json[i].id == RankModel.CreateInstance().MySelfId)
+                if (json[i].Id == RankModel.CreateInstance().MySelfId)
                 {
                     FreshMyRankInfo(i < 3, json);
                     break;
@@ -57,7 +62,7 @@ namespace Controller
         /// <param name="value"></param>
         private void UpdateCountDownTxt(int value)
         {
-            this.rankView.ShowCutDown($"Ends in: {FormatTime(value)}");
+            rankView.ShowCutDown($"Ends in: {FormatTime(value)}");
         }
 
         /// <summary>
